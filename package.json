@@ -1,0 +1,21 @@
+{
+  "name": "my-node-rest",
+  "version": "1.0.0",
+  "description": "node rest application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "PAYAL SUREJA",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
