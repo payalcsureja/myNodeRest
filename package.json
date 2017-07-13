@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "node rest application",
   "main": "index.js",
+  "start": "nodemon index.js",
   "scripts": {
-    "test": "test"
+    "dev": "nodemon index.js", // npm run dev
+    "test": "test" // npm run test
   },
   "author": "PAYAL SUREJA",
   "license": "ISC",
