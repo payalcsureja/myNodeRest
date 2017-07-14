@@ -5,7 +5,7 @@ const app            = express(); // define our app using express
 const bodyParser     = require('body-parser'); // parses the body portion of an incoming HTTP request and makes it easier to extract different parts of the contained information
 
 // ROUTES FOR OUR API
-const routes = require('./app/routes');
+const routes = require('./app/routes')(express);
 
 // set our port
 const port = process.env.PORT || 8080;  // run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 // process.env.PORT from Heroku/...
