@@ -4,8 +4,9 @@
   "description": "node rest application",
   "main": "index.js",
    
-  "scripts": {     
-    "start": "nodemon index.js", 
+  "scripts": {   
+    "serve": "nodemon index.js",   
+    "start": "node index.js", 
     "test": "test" 
   },
   "repository": {
