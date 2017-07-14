@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "node rest application",
   "main": "index.js",
-  "start": "nodemon index.js",
-  "scripts": {
-    "dev": "nodemon index.js", // npm run dev
-    "test": "test" // npm run test
+   
+  "scripts": {     
+    "start": "nodemon index.js", 
+    "test": "test" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payalcsureja/myNodeRest.git"
   },
   "author": "PAYAL SUREJA",
   "license": "ISC",
