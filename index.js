@@ -6,6 +6,10 @@ const bodyParser     = require('body-parser'); // parses the body portion of an 
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 // const methodOverride = require('method-override');
 
+const config = require('./app/config/app.config'); // looks for app.config.js
+
+const db = require('./app/common/db');
+
 // ROUTES FOR OUR API
 const routes = require('./app/routes')(express);
 
