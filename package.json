@@ -4,7 +4,9 @@
   "description": "node rest application",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js",
+    "serve_windows": "SET ENV=local&&nodemon index.js",
+    "serve": "ENV=local nodemon index.js",
+    "dev": "ENV=dev node index.js",
     "start": "node index.js",
     "test": "test"
   },
