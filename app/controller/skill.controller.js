@@ -39,10 +39,10 @@ exports.get = function (req, res) { console.log(req.params.id);
 exports.getAll = function (req, res) {
     Skill.find(function(err, result) {
         if (!err) {
-            // return res.json(result);
-            return res.json({
-                data: result
-            });
+            return res.json(result);
+            // return res.json({
+            //     data: result
+            // });
         } else {
             return res.send(err); // 500 error
         }
