@@ -9,12 +9,21 @@ const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const config = require('./app/config/app.config'); // looks for app.config.js
 
 const db = require('./app/common/db');
+const cors = require('./app/common/cors');
 
 // ROUTES FOR OUR API
 const routes = require('./app/routes')(express);
 
 // set our port
 const port = process.env.PORT || 8080;  // run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 // process.env.PORT from Heroku/...
+
+// CORS Fix .. moved to cors module or use cors npm module
+// app.all('/*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
+app.use(cors());
 
 // configure app to use bodyParser() ,this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));  // parse application/x-www-form-urlencoded
