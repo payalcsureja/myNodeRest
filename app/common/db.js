@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const config = require('../config/app.config');
 
 const options = {
-    // server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-    // replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } },
+    // server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    // replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
+    keepAlive: 1,
+    connectTimeoutMS: 30000,
     useMongoClient: true,
   };
 
@@ -24,6 +26,13 @@ db.on("error", function(error) {
 db.on('disconnected', function () {
   console.log('Mongoose default connection to DB :' + config.db + ' disconnected');
 });
+
+// process.on('SIGINT', function() {
+//   db.close(function () {
+//     console.log('Mongoose default connection disconnected through app termination');
+//     process.exit(0);
+//   });
+// });
 
 // db.on('error', function(error) {
 //   console.error('Database connection error:', error);

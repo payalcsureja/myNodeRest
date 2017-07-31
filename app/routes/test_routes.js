@@ -6,14 +6,14 @@ module.exports = function (routes) {
 }
 
 //APIs
-function test(req, res) {    
+function test(req, res) {
     res.send("Get all test.");
 }
 
-function tests(req, res) {    
+function tests(req, res) {
     res.send("Get all tests.");
 }
 
-// function users(req, res) {    
+// function users(req, res) {
 //     res.send("Get all users.");
 // }
