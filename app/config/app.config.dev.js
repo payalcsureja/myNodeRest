@@ -1,6 +1,8 @@
 module.exports = {
   'env': 'dev',
   'debug': true,
+  'debugMorganType' : 'dev',
   'secret': 'ilovecoding',
-  'db': ''
+  'db': '',
+  'port': 8080
 };
