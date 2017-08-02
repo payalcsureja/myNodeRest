@@ -1,5 +1,5 @@
 module.exports = {
-  'env': 'dev',
+  'env': 'heroku',
   'debug': true,
   'debugMorganType' : 'dev',
   'secret': 'ilovecoding',

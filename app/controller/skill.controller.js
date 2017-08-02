@@ -6,9 +6,9 @@ var Skill = require('../model/skill.model').Skill;
 exports.create = function (req, res) {
     Skill.create(req.body, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 };
@@ -17,9 +17,9 @@ exports.create = function (req, res) {
 exports.importMany = function (req, res) {
     Skill.importMany(req.body, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 };
@@ -28,23 +28,23 @@ exports.importMany = function (req, res) {
 exports.get = function (req, res) { console.log(req.params.id);
     Skill.get({_id: req.params.id}, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 };
 
 /** getSkills function to get all Skills. */
 exports.getAll = function (req, res) {
-    Skill.find(function(err, result) {
+    Skill.find({},function(err, result) {
         if (!err) {
-            return res.json(result);
-            // return res.json({
+            return res.returnSuccess(result);
+            // return res.returnSuccess({
             //     data: result
             // });
         } else {
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 };
@@ -53,9 +53,9 @@ exports.getAll = function (req, res) {
 exports.update = function (req, res) {
     Skill.updateById(req.params.id, req.body, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 }
@@ -64,10 +64,9 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
     Skill.removeById({_id: req.params.id}, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            console.log(err);
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 }
@@ -76,10 +75,9 @@ exports.delete = function (req, res) {
 exports.deleteAll = function (req, res) {
     Skill.removeAll(function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.returnSuccess(result);
         } else {
-            console.log(err);
-            return res.send(err); // 500 error
+            return res.returnFail(err); // 500 error
         }
     });
 }

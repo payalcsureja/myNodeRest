@@ -1,5 +1,5 @@
 module.exports = {
-  'env': 'dev',
+  'env': 'production',
   'debug': false,
   'debugMorganType' : 'dev',
   'secret': 'ilovecoding',

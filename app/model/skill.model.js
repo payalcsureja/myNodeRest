@@ -42,8 +42,8 @@ SkillSchema.statics = {
     updateById: function(id, updateData, callback) {
         this.update(id, {$set: updateData}, callback);
     },
-    removeById: function(removeData, callback) {
-        this.remove(removeData, callback);
+    removeById: function(id, callback) {
+        this.remove(id, callback);
     },
     removeAll: function(callback) {
         this.remove(callback);

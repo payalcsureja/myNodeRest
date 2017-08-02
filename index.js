@@ -10,6 +10,7 @@ const config = require('./app/config/app.config'); // looks for app.config.js
 
 const db = require('./app/common/db');
 const cors = require('./app/common/cors');
+const httpWrapper = require('./app/common/http');
 
 // ROUTES FOR OUR API
 const routes = require('./app/routes')(express);
@@ -24,6 +25,7 @@ const port = process.env.PORT || config.port;  // run PORT=4444 node index.js, N
 //   next();
 // });
 app.use(cors());
+
 
 // configure app to use bodyParser() ,this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));  // parse application/x-www-form-urlencoded
@@ -50,12 +52,31 @@ app.use(bodyParser.json()); // parse application/json
 if(config.debug) {
   app.use(morgan(config.debugMorganType)); // log every request to the console
 }
+app.use(httpWrapper());
+
 
 // REGISTER OUR ROUTES - Connect all our routes to our application
 // all of our routes will be prefixed with /api
 // Add /v1 for versions
 // app.use('/', routes);
 app.use('/api', routes);
+app.get('*', function(req, res, next) {
+  // var err = new Error();
+  // err.status = 404;
+  // err.message = 'No routes found!';
+  var notFound  = new Error('No routes found!');
+  notFound .status = 404;
+  next(notFound );
+});
+app.use(function(err, req, res, next) {
+  // logic
+  if(err.status !== 404) {
+    return next();
+  }
+
+  res.status(404);
+  res.send(err.message || '** no unicorns here **');
+});
 // app.use('/api', [authenticationMiddlewareFunction], require('./routes/api'));
 
 // START THE SERVER
