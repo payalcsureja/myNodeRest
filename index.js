@@ -4,6 +4,7 @@ const express        = require('express'); // call express
 const app            = express(); // define our app using express
 const bodyParser     = require('body-parser'); // parses the body portion of an incoming HTTP request and makes it easier to extract different parts of the contained information
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
+const helmet = require('helmet'); // Helmet helps you secure your Express apps by setting various HTTP headers.
 // const methodOverride = require('method-override');
 
 const config = require('./app/config/app.config'); // looks for app.config.js
@@ -18,6 +19,8 @@ const routes = require('./app/routes')(express);
 // set our port
 const port = process.env.PORT || config.port;  // run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 // process.env.PORT from Heroku/...
 
+app.use(helmet());
+
 // CORS Fix .. moved to cors module or use cors npm module
 // app.all('/*', function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -25,7 +28,6 @@ const port = process.env.PORT || config.port;  // run PORT=4444 node index.js, N
 //   next();
 // });
 app.use(cors());
-
 
 // configure app to use bodyParser() ,this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));  // parse application/x-www-form-urlencoded
