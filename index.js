@@ -6,6 +6,8 @@ const bodyParser     = require('body-parser'); // parses the body portion of an 
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const helmet = require('helmet'); // Helmet helps you secure your Express apps by setting various HTTP headers.
 const methodOverride = require('method-override'); // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+const session = require('express-session');
+const csrf = require('csurf');
 
 const config = require('./app/config/app.config'); // looks for app.config.js
 
@@ -19,7 +21,37 @@ const routes = require('./app/routes')(express);
 // set our port
 const port = process.env.PORT || config.port;  // run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 // process.env.PORT from Heroku/...
 
+// Security
 app.use(helmet());
+
+var sessionConfig = {
+  secret: config.secret,
+  name: config.sessionId,
+  // genid: function(req) {
+  //   return genuuid() // use UUIDs for session IDs
+  // },
+  cookie: {}
+}
+if (config.envType === 'prod') { // app.get('envType')
+  app.set('trust proxy', 1) // trust first proxy
+  sessionConfig.cookie.secure = true // serve secure cookies
+  sessionConfig.cookie.httpOnly = true
+}
+app.use(session(sessionConfig));
+
+app.use(csrf());
+// app.use(function(req, res, next) {
+//   res.locals._csrf = req.csrfToken();
+//   next();
+// });
+// error handler
+// app.use(function (err, req, res, next) {
+//   if (err.code !== 'EBADCSRFTOKEN') return next(err)
+
+//   // handle CSRF token errors here
+//   res.status(403)
+//   res.send('form tampered with')
+// })
 
 // CORS Fix .. moved to cors module or use cors npm module
 // app.all('/*', function(req, res, next) {

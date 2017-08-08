@@ -23,7 +23,7 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({ message: 'hooray! welcome to our api!' });
 });
 
 // more routes for our API will happen here
@@ -38,7 +38,7 @@ app.listen(port);
 console.log('Magic happens on port ' + port);-->
 
 
- <!--"scripts": { 
+ <!--"scripts": {
     // https://docs.npmjs.com/misc/scripts
     // "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
     // "heroku-postbuild": "echo This runs afterwards.",
@@ -51,3 +51,16 @@ console.log('Magic happens on port ' + port);-->
     "start": "nodemon index.js", // "node index.js", // npm run start
     "test": "test" // npm run test
   },-->
+
+  <!--
+
+  1) mongod -dbpath /c/Users/surejap/www/mongodata
+  2) npm run serve_windows
+  3) npm install
+  4) git cmds
+
+  git status
+  git add *
+  git commit -m "security modules for csrf"
+  git push
+  -->
