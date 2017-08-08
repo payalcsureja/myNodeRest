@@ -61,6 +61,6 @@ console.log('Magic happens on port ' + port);-->
 
   git status
   git add *
-  git commit -m "security modules for csrf"
+  git commit -a -m "security modules for csrf"
   git push
   -->
