@@ -30,7 +30,9 @@ var sessionConfig = {
   // genid: function(req) {
   //   return genuuid() // use UUIDs for session IDs
   // },
-  cookie: {}
+  cookie: {},
+  resave: true,
+  saveUninitialized: true
 }
 if (config.envType === 'prod') { // app.get('envType')
   app.set('trust proxy', 1) // trust first proxy
