@@ -6,6 +6,7 @@ module.exports = function (routes) {
   routes.post('/user', User.create);
   routes.post('/users', User.importMany);
 	routes.get('/user/:id', User.get);
+  routes.get('/user/:field/:value', User.getByField);
 	routes.put('/user/:id', User.update);
 	routes.delete('/user/:id', User.delete);
   routes.delete('/users', User.deleteAll);

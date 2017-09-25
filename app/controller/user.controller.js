@@ -35,6 +35,22 @@ exports.get = function (req, res) {
     });
 };
 
+/** getUser function to get User by id. */
+exports.getByField = function (req, res) {
+    let field = req.params.field;
+    let value = req.params.value;
+    let query = {};
+    query[field] = value;
+
+    User.get(query, function(err, result) {
+        if (!err) {
+            return res.returnSuccess(result);
+        } else {
+            return res.returnFail(err); // 500 error
+        }
+    });
+};
+
 /** getUsers function to get all Users. */
 exports.getAll = function (req, res) {
     User.find({},function(err, result) {
