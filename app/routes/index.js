@@ -19,10 +19,10 @@ module.exports = function (express) {
         // res.status(200).json({ message: 'Connected!' });
         res.send("Welcome to Node JS V1");
     });
-    
+
     //modules
     require('./test_routes')(routes);
-    // require('./users')(routes);
+    require('./user.routes')(routes);
     require('./skill.routes')(routes);
 
     return routes;

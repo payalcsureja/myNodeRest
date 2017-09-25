@@ -8,6 +8,7 @@ const helmet = require('helmet'); // Helmet helps you secure your Express apps b
 const methodOverride = require('method-override'); // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 const session = require('express-session');
 const csrf = require('csurf');
+const jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 const config = require('./app/config/app.config'); // looks for app.config.js
 
@@ -21,10 +22,12 @@ const routes = require('./app/routes')(express);
 // set our port
 const port = process.env.PORT || config.port;  // run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 // process.env.PORT from Heroku/...
 
+app.set('superSecret', config.secret); // secret variable app.get('superSecret')
+
 // Security
 app.use(helmet());
 
-var sessionConfig = {
+let sessionConfig = {
   secret: config.secret,
   name: config.sessionId,
   // genid: function(req) {
@@ -42,10 +45,13 @@ if (config.envType === 'prod') { // app.get('envType')
 app.use(session(sessionConfig));
 
 app.use(csrf());
-// app.use(function(req, res, next) {
-//   res.locals._csrf = req.csrfToken();
-//   next();
-// });
+app.use(function(req, res, next) { //console.log(req.csrfToken());
+  // res.locals._csrf = req.csrfToken();
+  //res.cookie('TOKEN', req.csrfToken());
+  res.locals.csrftoken = req.csrfToken();
+  // console.log(res.locals.csrftoken); // Post this as x-csrf-token header via postman to test delete and post methods
+  next();
+});
 // error handler
 // app.use(function (err, req, res, next) {
 //   if (err.code !== 'EBADCSRFTOKEN') return next(err)
@@ -89,8 +95,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 if(config.debug) {
   app.use(morgan(config.debugMorganType)); // log every request to the console
 }
-app.use(httpWrapper());
-
+app.use(httpWrapper()); // Custom http response wrapper
 
 // REGISTER OUR ROUTES - Connect all our routes to our application
 // all of our routes will be prefixed with /api
@@ -101,11 +106,20 @@ app.get('*', function(req, res, next) {
   // var err = new Error();
   // err.status = 404;
   // err.message = 'No routes found!';
-  var notFound  = new Error('No routes found!');
+  let notFound  = new Error('No routes found!');
   notFound .status = 404;
   next(notFound );
 });
 app.use(function(err, req, res, next) {
+
+  if (err.code !== 'EBADCSRFTOKEN') {
+    return next(err);
+  }
+
+  // handle CSRF token errors here
+  res.status(403);
+  res.send('form tampered with');
+
   // logic
   if(err.status !== 404) {
     return next();
@@ -113,6 +127,8 @@ app.use(function(err, req, res, next) {
 
   res.status(404);
   res.send(err.message || '** no unicorns here **');
+
+
 });
 // app.use('/api', [authenticationMiddlewareFunction], require('./routes/api'));
 

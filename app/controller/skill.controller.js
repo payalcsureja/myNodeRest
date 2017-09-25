@@ -25,7 +25,7 @@ exports.importMany = function (req, res) {
 };
 
 /** getSkill function to get Skill by id. */
-exports.get = function (req, res) { console.log(req.params.id);
+exports.get = function (req, res) {
     Skill.get({_id: req.params.id}, function(err, result) {
         if (!err) {
             return res.returnSuccess(result);

@@ -63,4 +63,6 @@ console.log('Magic happens on port ' + port);-->
   git add *
   git commit -a -m "security modules for csrf"
   git push
+
+  git push heroku master
   -->

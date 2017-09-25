@@ -1,13 +1,12 @@
-'use strict';
-
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
 /**
  * @module skill
  * @description contain the details of skill information, conditions and actions.
  * http://mongoosejs.com/docs/schematypes.html
  */
+'use strict';
+
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
 var SkillSchema = new Schema({
   name: { type: String, required: true, unique: true },
