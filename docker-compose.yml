@@ -1,0 +1,26 @@
+# 1. Run docker-compose build
+# 2. Run docker-compose up -d
+
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  noderest: #name of the service
+    container_name: noderest #name of the service
+    build: . # specify the directory of the Dockerfile
+      #context: . # specify the directory of the Dockerfile
+      #dockerfile: dockerfile.dev # specify the name of the Dockerfile
+    ports:
+      #- "3000:3000" #specify ports forewarding
+      - "8080:8080" #specify ports forewarding
+    volumes:
+      - /c/Users/prash/Documents/www/myNodeRest:/usr/src/myNodeRest:rw # this is working to load data
+      #- .:/usr/src/myNodeRest:rw # this is working to load data
+      #- www
+    working_dir: /usr/src/myNodeRest
+    command: npm start
+
+#volumes:
+  #./www:/c/Users/prash/Documents/myNodeRest #If you just want to use the path "data" you have to specify all address of it. Here's an exemple: ./data:cjworkbench:rw/
+  # www: #If you just want to use the path "data" you have to specify all address of it. Here's an exemple: ./data:cjworkbench:rw/
+  #driver: local

@@ -1,0 +1,33 @@
+#cmd to run with docker file ( build + run)
+#docker build --no-cache -t payalcsureja/noderest .
+#docker run -p 3000:3000 -p 8080:8080 -it --rm -d --name pcsnoderest payalcsureja/noderest
+
+#cmd to run without docker file inside dir to get $pwd
+#docker run -p 3000:3000 -p 8080:8080 --rm -d -v $(pwd):/usr/src/myNodeRest -w "/usr/src/myNodeRest" --name pcsnoderest node npm start
+#cmd to run without docker file from any path
+#docker run -p 3000:3000 -p 8080:8080 --rm -d -v /c/Users/prash/Documents/www/myNodeRest:/usr/src/myNodeRest:rw -w "/usr/src/myNodeRest" --name pcsnoderest node npm start
+
+FROM node:latest
+
+LABEL Description="Dockerfile for node rest server"
+LABEL Version="0.0.1"
+LABEL Author="Payal Sureja <payalcsureja@gmail.com>"
+
+# node setup
+ENV NODE_PATH=/usr/local/lib/node_modules/:/usr/local/lib NODE_ENV=development
+
+# payalcsureja/nodeserver
+RUN mkdir -p /usr/src/myNodeRest
+VOLUME ["/c/Users/prash/Documents/www/myNodeRest"]
+COPY . /usr/src/myNodeRest
+WORKDIR /usr/src
+RUN chmod -R 776 *
+WORKDIR /usr/src/myNodeRest
+RUN ls
+RUN npm install
+
+EXPOSE 3000 8080
+
+# launch app
+CMD ["npm","start" ]
+
