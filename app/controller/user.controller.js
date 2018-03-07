@@ -35,7 +35,7 @@ exports.get = function (req, res) {
     });
 };
 
-/** getUser function to get User by id. */
+/** getUser function to get User by field. */
 exports.getByField = function (req, res) {
     let field = req.params.field;
     let value = req.params.value;

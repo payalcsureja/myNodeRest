@@ -47,7 +47,8 @@ app.use(session(sessionConfig));
 app.use(csrf());
 app.use(function(req, res, next) { //console.log(req.csrfToken());
   // res.locals._csrf = req.csrfToken();
-  //res.cookie('TOKEN', req.csrfToken());
+  // res.cookie('TOKEN', req.csrfToken());
+  // res.cookie('XSRF-TOKEN', req.csrfToken());
   res.locals.csrftoken = req.csrfToken();
   // console.log(res.locals.csrftoken); // Post this as x-csrf-token header via postman to test delete and post methods
   next();
