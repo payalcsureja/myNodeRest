@@ -18,7 +18,8 @@ services:
       #- .:/usr/src/myNodeRest:rw # this is working to load data
       #- www
     working_dir: /usr/src/myNodeRest
-    command: npm start
+    command: npm run serve #Based on package.json scripts use npm run serve_windows / npm run serve / npm run dev / npm start # Create sep yaml files to keep this settings per ENV
+    #command: npm start # for production ENV config
 
 #volumes:
   #./www:/c/Users/prash/Documents/myNodeRest #If you just want to use the path "data" you have to specify all address of it. Here's an exemple: ./data:cjworkbench:rw/
