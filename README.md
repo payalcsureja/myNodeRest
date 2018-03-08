@@ -54,7 +54,7 @@ console.log('Magic happens on port ' + port);-->
 
   <!--
 
-  1) mongod -dbpath /c/Users/surejap/www/mongodata
+  1) mongod -dbpath /c/Users/surejap/www/mongodata          or    mongod -dbpath /c/Users/xxxxxxxxxxx/www/mongodata
   2) npm run serve_windows
   3) npm install
   4) git cmds
@@ -65,4 +65,12 @@ console.log('Magic happens on port ' + port);-->
   git push
 
   git push heroku master
+
+
+  mongodump --out /c/Users/prash/Downloads/
+  mongodump --collection myCollection --db test
+
+  mongorestore /c/Users/prash/Downloads/myMongoDb
+  this will restore given path data to current running instance
+
   -->
